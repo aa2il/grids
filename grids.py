@@ -32,7 +32,6 @@ import os
 from unidecode import unidecode
 import argparse
 from pprint import pprint
-from rig_io.ft_tables import MY_CALL
 
 import mpl_toolkits
 mpl_toolkits.__path__.append('/usr/lib/python2.7/dist-packages/mpl_toolkits/')
@@ -41,6 +40,7 @@ import matplotlib.pyplot as plt
 from datetime import timedelta,datetime
 
 from pyhamtools.locator import locator_to_latlong
+from settings import *
 
 ################################################################################
 
@@ -73,6 +73,8 @@ class PARAMS:
         else:
             self.offset=0
             self.states_offset=0
+
+        self.SETTINGS = read_settings('.keyerrc')
             
 ################################################################################
 
@@ -128,6 +130,7 @@ else:
 
 ax = plt.gca()
 DATE = datetime.now().strftime('%m/%d/%y')
+MY_CALL=P.SETTINGS['MY_CALL']
 if P.SAT or P.SAT2:
     ax.set_title(MY_CALL+' - Satellite Grids Worked as of '+DATE)
 else:
