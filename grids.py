@@ -132,9 +132,9 @@ ax = plt.gca()
 DATE = datetime.now().strftime('%m/%d/%y')
 MY_CALL=P.SETTINGS['MY_CALL']
 if P.SAT or P.SAT2:
-    ax.set_title(MY_CALL+' - Satellite Grids Worked as of '+DATE)
+    ax.set_title(MY_CALL+' - Satellite Grids Confirmed as of '+DATE)
 else:
-    ax.set_title(MY_CALL+' - 6-meter Grids Worked as of '+DATE)
+    ax.set_title(MY_CALL+' - 6-meter Grids Confirmed as of '+DATE)
 
 # Load the shapefile, use the name 'states'
 m.readshapefile('st99_d00', name='states', drawbounds=True)
