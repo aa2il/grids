@@ -106,6 +106,7 @@ for i in range(1, sheet1.nrows):
     grid = unidecode( sheet1.cell(i, 3+P.offset).value )
     if len(grid)>0:
         grids.append( grid.upper() )
+grids.sort()
 print('Grids:',grids)
 #sys.exit(0)
 
