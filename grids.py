@@ -94,8 +94,9 @@ sheet1 = book.sheet_by_name('6-meters')
 # Digest confirmed states
 states=[]
 for i in range(1, sheet1.nrows):
+    #print(i,sheet1.cell(i, P.states_offset) )
     state = unidecode( sheet1.cell(i, P.states_offset).value )
-    if len(state)>0:
+    if len(state)>0 and 'Paper' not in state:
         a=state.split('(')
         states.append( a[0].strip() )
 print('States:',states)
@@ -104,7 +105,7 @@ print('States:',states)
 grids=[]
 for i in range(1, sheet1.nrows):
     grid = unidecode( sheet1.cell(i, 3+P.offset).value )
-    if len(grid)>0:
+    if len(grid)>0 and 'Paper' not in grid:
         grids.append( grid.upper() )
 grids.sort()
 print('Grids:',grids)
