@@ -74,7 +74,7 @@ class PARAMS:
             self.offset=0
             self.states_offset=0
 
-        self.SETTINGS = read_settings('.keyerrc')
+        self.SETTINGS,junk = read_settings('.keyerrc')
             
 ################################################################################
 
@@ -127,8 +127,11 @@ else:
     m.drawparallels(np.arange(-90.,91.,15.),labels=[True,True,False,False],dashes=[2,2])
     m.drawmeridians(np.arange(-180.,181.,15.),labels=[False,False,False,True],dashes=[2,2])
     m.drawmapboundary(fill_color='lightblue')
-    m.drawcountries(linewidth=2, linestyle='solid', color='k' ) 
-    m.drawstates(linewidth=0.5, linestyle='solid', color='k')
+    try:
+        m.drawcountries(linewidth=2, linestyle='solid', color='k' ) 
+        m.drawstates(linewidth=0.5, linestyle='solid', color='k')
+    except:
+        pass
 
 ax = plt.gca()
 DATE = datetime.now().strftime('%m/%d/%y')
