@@ -99,7 +99,7 @@ for i in range(1, sheet1.nrows):
     if len(state)>0 and 'Paper' not in state:
         a=state.split('(')
         states.append( a[0].strip() )
-print('States:',states)
+print('States:',states,len(states))
 
 # Digest confirmed grids
 grids=[]
@@ -108,7 +108,7 @@ for i in range(1, sheet1.nrows):
     if len(grid)>0 and 'Paper' not in grid:
         grids.append( grid.upper() )
 grids.sort()
-print('Grids:',grids)
+print('Grids:',grids,len(grids))
 #sys.exit(0)
 
 ################################################################################
