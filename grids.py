@@ -48,6 +48,7 @@ from settings import *
 ATOLL_CUTOFF = 0.005
 FNAME = os.path.expanduser('~/Python/data/states.xls')
 US_ONLY=False
+#US_ONLY=True
 
 ################################################################################
 
@@ -120,6 +121,8 @@ if US_ONLY:
 else:
     m = Basemap(width=1.1*6000000,height=2*4500000,resolution='c',
                 projection='aea',lat_1=35.,lat_2=45,lon_0=-100,lat_0=40)
+#    m = Basemap(llcrnrlon=-131,llcrnrlat=-10,urcrnrlon=-60,urcrnrlat=70,
+#                projection='aea',lat_1=32,lat_2=45,lon_0=-95)
     m.drawcoastlines(linewidth=0.5)
     #m.fillcontinents(color='tan',lake_color='lightblue')
 
@@ -137,9 +140,11 @@ ax = plt.gca()
 DATE = datetime.now().strftime('%m/%d/%y')
 MY_CALL=P.SETTINGS['MY_CALL']
 if P.SAT or P.SAT2:
-    ax.set_title(MY_CALL+' - Satellite Grids Confirmed as of '+DATE)
+    band='Satellite'
 else:
-    ax.set_title(MY_CALL+' - 6-meter Grids Confirmed as of '+DATE)
+    band='6-meter'
+ax.set_title(MY_CALL+' - '+band+' Confirmed \n States ('+str(len(states))+ \
+             ') & Grids ('+str(len(grids))+') as of '+DATE)
 
 # Load the shapefile, use the name 'states'
 m.readshapefile('st99_d00', name='states', drawbounds=True)
