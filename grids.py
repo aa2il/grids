@@ -7,7 +7,10 @@
 # GUI to plot confirmed 6m & Satellite states & grids.
 #
 # Notes:
-#    - pip install pyhamtools
+#    Linux:
+#          pip install pyhamtools
+#    Windoz:
+#          pip install xlrd unidecode pyhamtools serial
 #
 ################################################################################
 #
@@ -118,9 +121,25 @@ print('Grids:',grids,len(grids))
 if US_ONLY:
     m = Basemap(llcrnrlon=-121,llcrnrlat=20,urcrnrlon=-62,urcrnrlat=51,
                 projection='lcc',lat_1=32,lat_2=45,lon_0=-95)
-else:
+elif 0:
+    m = Basemap(llcrnrlon=-120.,llcrnrlat=20.,urcrnrlon=-62.,urcrnrlat=51.,\
+            rsphere=(6378137.00,6356752.3142),\
+            resolution='l',projection='merc',\
+            lat_0=40.,lon_0=-20.,lat_ts=20.)
+elif 0:
+    #m = Basemap(projection='mill',lon_0=180)
+    #m = Basemap(llcrnrlon=-171,llcrnrlat=10,urcrnrlon=-62,urcrnrlat=61,resolution='c',
+    #            projection='mill',lat_1=32,lat_2=45,lon_0=-95)
     m = Basemap(width=1.1*6000000,height=2*4500000,resolution='c',
-                projection='aea',lat_1=35.,lat_2=45,lon_0=-100,lat_0=40)
+                projection='mill',lat_1=35.,lat_2=45,
+                lon_0=-100,lat_0=40)
+else:
+    m = Basemap(width=1.1*12000000,height=2*4500000,resolution='c',
+                projection='aea',lat_1=35.,lat_2=45,
+                lon_0=-100,lat_0=40)
+#    m = Basemap(width=1.1*6000000,height=2*4500000,resolution='c',
+#                projection='aea',lat_1=35.,lat_2=45,
+#                lon_0=-100,lat_0=40)
 #    m = Basemap(llcrnrlon=-131,llcrnrlat=-10,urcrnrlon=-60,urcrnrlat=70,
 #                projection='aea',lat_1=32,lat_2=45,lon_0=-95)
     m.drawcoastlines(linewidth=0.5)
