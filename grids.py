@@ -49,7 +49,6 @@ from settings import *
 
 # User params
 ATOLL_CUTOFF = 0.005
-FNAME = os.path.expanduser('~/Python/data/states.xls')
 US_ONLY=False
 #US_ONLY=True
 
@@ -89,10 +88,12 @@ print("\nP=",end=' ')
 #print "\nP=",
 pprint(vars(P))
 
-################################################################################
-
 # Read XLS format spreadsheet and pull out sheet with confirmation data
-book  = xlrd.open_workbook(FNAME,formatting_info=True)
+MY_CALL = P.SETTINGS['MY_CALL'].replace('/','_')
+print('MY_CALL=',MY_CALL)
+fname = os.path.expanduser('~/'+MY_CALL+'/states.xls')
+print('fname=',fname)
+book  = xlrd.open_workbook(fname,formatting_info=True)
 sheet1 = book.sheet_by_name('6-meters')
 
 # Digest confirmed states

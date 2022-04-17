@@ -11,9 +11,10 @@ echo  	 - Open Setting & search for environment --> set environment vars for you
 echo	 - New --> PYTHONPATH    ...  C:\Users\Joea\Python\libs
 echo	 - Resetart command prompt for this to take effect
 echo.
-echo These as long as we have data directory - need to revist where we store things?
+echo To run:
+echo.
 echo    grids.py
 echo    grids.py -sat
 echo.
-echo Did not try standalone exe until get demos/basemap1.exe working
+echo Do not try standalone exe until get demos/basemap1.exe working
 echo.
