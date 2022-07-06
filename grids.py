@@ -171,18 +171,27 @@ for country in countries:
     #print(name,len(name))
     if name in dxccs:
         print(name)
-        ax.add_geometries(country.geometry,
-                          ccrs.PlateCarree(),
-                          facecolor='red' ,alpha=0.5)
+        try:
+            ax.add_geometries(country.geometry,
+                              ccrs.PlateCarree(),
+                              facecolor='red' ,alpha=0.5)
+        except Exception as e: 
+            print(e)
+            print('Problem drawing country - Oh well')
 
 # Plot confirmed states
 for state in states:
     name = state.attributes['name'].replace('\0',' ').strip()
     if name in confirmed_states:
-        ax.add_geometries(state.geometry, ccrs.PlateCarree(),
-                          facecolor='red',
-                          edgecolor='#FFFFFF',
-                          linewidth=.25)
+        try:
+            ax.add_geometries(state.geometry, ccrs.PlateCarree(),
+                              facecolor='red',
+                              edgecolor='#FFFFFF',
+                              linewidth=.25)
+        except Exception as e: 
+            print(e)
+            print('Problem drawing state - name=',name)
+
 
 # Plot confirmed grids
 for grid in grids:
