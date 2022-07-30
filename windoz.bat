@@ -13,8 +13,12 @@ echo	 - Resetart command prompt for this to take effect
 echo.
 echo To run:
 echo.
-echo    grids.py
-echo    grids.py -sat
+echo    grids1.py
+echo    grids1.py -sat
 echo.
-echo Do not try standalone exe until get demos/basemap1.exe working
+echo This will not work until we get cartopy working on winbloz:
+echo    grids.py
+echo.
+echo Do not try standalone exe until get demos/basemap1.exe or
+echo demos/cart1/py working
 echo.

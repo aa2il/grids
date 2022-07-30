@@ -169,6 +169,7 @@ states = shpreader.Reader(shpfilename).records()
 for country in countries:
     name=country.attributes['NAME_LONG'].replace('\0',' ').strip().upper()
     #print(name,len(name))
+    #print(country.geometry)
     if name in dxccs:
         print(name)
         try:
