@@ -72,6 +72,15 @@ class PARAMS:
             
 ################################################################################
 
+# JBA - Newer versions of Shapely are finicky - make sure we're dealing with a list
+def geo_fixup(geo):
+    #print('geo type=',geo.geom_type)
+    if geo.geom_type=='Polygon':
+        return [geo]
+    else:
+        return geo
+
+################################################################################
 
 print("\n\n***********************************************************************************")
 print("\nStarting Grid Plotter  ...")
@@ -118,6 +127,8 @@ print('Grids:',grids,len(grids))
 dxccs=[]
 for i in range(1, sheet1.nrows):
     dxcc = unidecode( sheet1.cell(i,6).value )
+    if 'UNITED STATES' in dxcc:
+        dxcc='UNITED STATES'
     if len(dxcc)>0 and 'Paper' not in dxcc:
         dxccs.append( dxcc.upper() )
 dxccs.sort()
@@ -173,7 +184,7 @@ for country in countries:
     if name in dxccs:
         print(name)
         try:
-            ax.add_geometries(country.geometry,
+            ax.add_geometries(geo_fixup(country.geometry),
                               ccrs.PlateCarree(),
                               facecolor='red' ,alpha=0.5)
         except Exception as e: 
@@ -185,7 +196,7 @@ for state in states:
     name = state.attributes['name'].replace('\0',' ').strip()
     if name in confirmed_states:
         try:
-            ax.add_geometries(state.geometry, ccrs.PlateCarree(),
+            ax.add_geometries(geo_fixup(state.geometry), ccrs.PlateCarree(),
                               facecolor='red',
                               edgecolor='#FFFFFF',
                               linewidth=.25)
@@ -206,7 +217,7 @@ for grid in grids:
                         miny=lat-0.5,maxy=lat+0.5)
     ax.add_geometries([geom], ccrs.PlateCarree(),
                           facecolor='blue',
-                          edgecolor='#FFFFFF',
+                          edgecolor='blue',
                           linewidth=.25)
     
 plt.show()
