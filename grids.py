@@ -38,6 +38,8 @@ from pprint import pprint
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 import matplotlib.patches as mpatches
+from matplotlib.image import imread
+
 import cartopy.io.shapereader as shpreader
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
@@ -112,7 +114,7 @@ for i in range(1, sheet1.nrows):
     if len(state)>0 and 'Paper' not in state:
         a=state.split('(')
         confirmed_states.append( a[0].strip() )
-print('Confirmed States:',confirmed_states,len(confirmed_states))
+print('\nConfirmed States:',confirmed_states,len(confirmed_states))
 
 # Digest confirmed grids
 grids=[]
@@ -121,7 +123,7 @@ for i in range(1, sheet1.nrows):
     if len(grid)>0 and 'Paper' not in grid:
         grids.append( grid.upper() )
 grids.sort()
-print('Grids:',grids,len(grids))
+print('\nConfirmed Grids:',grids,len(grids))
                       
 # Digest confirmed countries
 dxccs=[]
@@ -132,19 +134,31 @@ for i in range(1, sheet1.nrows):
     if len(dxcc)>0 and 'Paper' not in dxcc:
         dxccs.append( dxcc.upper() )
 dxccs.sort()
-print('DXCCs:',dxccs,len(dxccs))
+print('\nConfirmed DXCCs:',dxccs,len(dxccs))
 #sys.exit(0)
 
 ################################################################################
 
 # Create the map
-fig = plt.figure()
+fig = plt.figure(num=MY_CALL+' - '+band)
 ax = fig.add_subplot(1, 1, 1,
                      projection=ccrs.PlateCarree(central_longitude=-75))
 
 # Put a background image on for nice sea rendering.
-ax.stock_img()
+if False:
+    # This doesn't work under pyinstaller ...
+    ax.stock_img()
+else:
+    # ... so we load image directly instead
+    fname='50-natural-earth-1-downsampled.png'
+    #print('fname=',fname)
+    img = imread(fname)
+    ax.imshow(img, origin='upper', transform=ccrs.PlateCarree(),
+              extent=[-180, 180, -90, 90])
 
+ax.set_aspect('auto')
+fig.tight_layout(pad=0)         # 3 To show title
+    
 # Create a feature for States/Admin 1 regions at 1:50m from Natural Earth
 states_provinces = cfeature.NaturalEarthFeature(
     category='cultural',
@@ -179,6 +193,8 @@ states = shpreader.Reader(shpfilename).records()
 # Plot confirmed countries
 for country in countries:
     name=country.attributes['NAME_LONG'].replace('\0',' ').strip().upper()
+    if name=='COLOMBIA':
+        name='COLUMBIA'
     #print(name,len(name))
     #print(country.geometry)
     if name in dxccs:
