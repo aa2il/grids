@@ -1,3 +1,6 @@
 /DIFFS
 /__pycache__/
 /#*
+/JUNK
+/build/*
+/dist/grids
