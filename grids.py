@@ -2,7 +2,7 @@
 ################################################################################
 #
 # grids.py - Rev 2.0
-# Copyright (C) 2021-2 by Joseph B. Attili, aa2il AT arrl DOT net
+# Copyright (C) 2021-3 by Joseph B. Attili, aa2il AT arrl DOT net
 #
 # GUI to plot confirmed 6m & Satellite states & grids.
 # New version to use cartopy instead of basemap.
@@ -193,12 +193,12 @@ states = shpreader.Reader(shpfilename).records()
 # Plot confirmed countries
 for country in countries:
     name=country.attributes['NAME_LONG'].replace('\0',' ').strip().upper()
-    if name=='COLOMBIA':
-        name='COLUMBIA'
+    #if name=='COLOMBIA':
+    #    name='COLUMBIA'
     #print(name,len(name))
     #print(country.geometry)
     if name in dxccs:
-        print(name)
+        print("***",name)
         try:
             ax.add_geometries(geo_fixup(country.geometry),
                               ccrs.PlateCarree(),
