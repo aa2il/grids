@@ -7,7 +7,7 @@ GUI to plot confirmed grids and states for 6-meters and Satellites.
 
 # Installation under Linux:
 
-1) Uses python3 and pyqt
+1) Uses python3
 2) Clone gitub grids, libs and data repositories
     - cd
     - mkdir Python

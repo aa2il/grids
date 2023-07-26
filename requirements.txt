@@ -7,7 +7,6 @@
 #
 #     setenv PYTHONPATH $HOME/Python/libs
 
-pyqt5
 matplotlib
 cartopy
 pyserial
