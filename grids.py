@@ -65,10 +65,32 @@ class PARAMS:
         # Process command line args
         # Can add required=True to anything that is required
         arg_proc = argparse.ArgumentParser()
+
+        # Unflagged args allowing us to readily add specific bands
+        #arg_proc.add_argument('Bands', metavar='Bands',
+        #                      type=str, nargs='*', default=None,
+        #                      help='Specific band')
+        
         arg_proc.add_argument('-sat', action='store_true',help='Satellites Confirmed')
+        arg_proc.add_argument('-6m', dest='six',action='store_true',help='Satellites Confirmed')
+        arg_proc.add_argument('-160m', dest='onesixty',action='store_true',help='Satellites Confirmed')
         args = arg_proc.parse_args()
 
         self.SAT  = args.sat
+        """
+        if len(args.Bands)>0:
+            self.SIX      = '6m' in args.Bands
+            self.ONESIXTY = '160m' in args.Bands
+        else:
+            self.SIX      = False
+            self.ONESIXTY = False
+        """
+        self.SIX = args.six
+        self.ONESIXTY = args.onesixty
+
+        #if not (self.SAT or self.SIX or self.ONESIXTY):
+        #    print('\n*** PARAMETER ERROR - Must select either -sat -6 or -160\n')
+        #    sys.exit(0)
 
         self.SETTINGS,junk = read_settings('.keyerrc')
             
@@ -96,8 +118,13 @@ DATE = datetime.now().strftime('%m/%d/%y')
 MY_CALL=P.SETTINGS['MY_CALL']
 if P.SAT:
     band='Satellites'
-else:
+elif P.SIX:
     band='6-meters'
+elif P.ONESIXTY:
+    band='160-meters'
+else:
+    print('\n*** PARAMETER ERROR - Must select either -sat -6m or -160m\n')
+    sys.exit(0)
 
 # Read XLS format spreadsheet and pull out sheet with confirmation data
 MY_CALL = P.SETTINGS['MY_CALL'].replace('/','_')
@@ -183,6 +210,7 @@ shpfilename = shpreader.natural_earth(resolution='110m',
                                       category='cultural',
                                       name='admin_0_countries')
 countries = shpreader.Reader(shpfilename).records()
+#print(countries)
 
 shpfilename = shpreader.natural_earth(resolution='110m',
                                       category='cultural',
@@ -191,8 +219,10 @@ shpfilename = shpreader.natural_earth(resolution='110m',
 states = shpreader.Reader(shpfilename).records()
 
 # Plot confirmed countries
+# We don't have geomtery data for all countries so somtimes this leaves somthing out
 for country in countries:
     name=country.attributes['NAME_LONG'].replace('\0',' ').strip().upper()
+    #print(name)
     #if name=='COLOMBIA':
     #    name='COLUMBIA'
     #print(name,len(name))
