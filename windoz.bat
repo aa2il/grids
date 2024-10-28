@@ -1,15 +1,15 @@
 @echo off
 echo.
-echo Notes about how to run grid plotter on Windoze 10
+echo Notes about how to run grid plotter on Windoze 10/11
 echo.
-echo Already should have matplotlib, basemap installed from demos
-echo Need a few more libs:
-echo    pip install xlrd unidecode pyhamtools serial
+echo    pip install -re requirements
 echo.
 echo This is the first code that references my libs so we need add PYTHONPATH to envrionment
 echo  	 - Open Setting & search for environment --> set environment vars for you account
 echo	 - New --> PYTHONPATH    ...  C:\Users\Joea\Python\libs
 echo	 - Resetart command prompt for this to take effect
+echo.
+echo Also need a copy of AA2IL/states.xls
 echo.
 echo --------------------------------------------------------------------------------------------------
 echo.
@@ -22,7 +22,7 @@ echo    pyinstaller --onefile grids.py
 echo.
 echo --------------------------------------------------------------------------------------------------
 echo.
-echo Deprecated - uses old basemap code - still works on windoz:
+echo Deprecated - uses old basemap code - still works on windoz 10:
 echo.
 echo    grids1.py
 echo    grids1.py -sat

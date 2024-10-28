@@ -2,7 +2,7 @@
 ################################################################################
 #
 # grids.py - Rev 2.0
-# Copyright (C) 2021-3 by Joseph B. Attili, aa2il AT arrl DOT net
+# Copyright (C) 2021-4 by Joseph B. Attili, aa2il AT arrl DOT net
 #
 # GUI to plot confirmed 6m & Satellite states & grids.
 # New version to use cartopy instead of basemap.
