@@ -1,8 +1,13 @@
-#! /usr/bin/python3
+#!/usr/bin/env -S uv run --script
+#
+#! /home/joea/miniconda3/envs/aa2il/bin/python -u
+#
+# NEW: /home/joea/miniconda3/envs/aa2il/bin/python -u
+# OLD: /usr/bin/python3 -u 
 ################################################################################
 #
 # grids.py - Rev 2.0
-# Copyright (C) 2021-4 by Joseph B. Attili, aa2il AT arrl DOT net
+# Copyright (C) 2021-5 by Joseph B. Attili, joe DOT aa2il AT gmail DOT com
 #
 # GUI to plot confirmed 6m & Satellite states & grids.
 # New version to use cartopy instead of basemap.
@@ -34,6 +39,13 @@ import os
 from unidecode import unidecode
 import argparse
 from pprint import pprint
+
+# Fix problems with recent python releases
+# Qt6Agg' is not a valid value for backend; supported values are
+# ['gtk3agg', 'gtk3cairo', 'gtk4agg', 'gtk4cairo', 'macosx', 'nbagg', 'notebook', 'qtagg', 'qtcairo', 'qt5agg', 'qt5cairo', 'tkagg', 'tkcairo', 'webagg', 'wx', 'wxagg', 'wxcairo', 'agg', 'cairo', 'pdf', 'pgf', 'ps', 'svg', 'template']
+if True:
+    import matplotlib
+    matplotlib.use('qtagg')
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
