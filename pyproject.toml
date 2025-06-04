@@ -8,7 +8,6 @@ dependencies = [
     "cartopy>=0.24.1",
     "matplotlib>=3.10.3",
     "psutil>=7.0.0",
-    "pyaudio>=0.2.14",
     "pyhamtools>=0.11.0",
     "pyqt6>=6.9.0",
     "pyserial>=3.5",

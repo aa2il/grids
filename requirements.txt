@@ -15,7 +15,6 @@ scipy
 
 psutil
 pytz
-pyaudio
 
 # Need this for matplotlib back-end
 pyqt6
