@@ -2,7 +2,7 @@
 ################################################################################
 #
 # grids.py - Rev 1.0 - Depricated
-# Copyright (C) 2021 by Joseph B. Attili, aa2il AT arrl DOT net
+# Copyright (C) 2021-5 by Joseph B. Attili, joe DOT aa2il AT gmail DOT com
 #
 # GUI to plot confirmed 6m & Satellite states & grids.
 # This version is being depricated in favor of a new version that uses cartopy.
